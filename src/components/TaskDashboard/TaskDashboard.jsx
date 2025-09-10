@@ -19,6 +19,7 @@ import {
 import TaskFilters from "./TaskFilters";
 import TaskList from "./TaskList";
 import {viewFormat} from "../../enums/viewFormat.js";
+import TaskCreateModal from "./TaskCreateModal.jsx";
 
 const TaskDashboard = () => {
     const dispatch = useDispatch();
@@ -38,6 +39,7 @@ const TaskDashboard = () => {
     };
 
     const renderFormat = view === viewFormat.LIST ? viewFormat.GRID : viewFormat.LIST;
+    const [dialogOpen, setDialogOpen] = useState(false);
 
     return (
         <Container maxW="6xl" py={8}>
@@ -55,6 +57,10 @@ const TaskDashboard = () => {
 
                 <TaskFilters />
 
+                <Button size="sm" colorScheme="blue" onClick={() => setDialogOpen(true)}>
+                    + New Task
+                </Button>
+
                 <Button
                     alignSelf="flex-end"
                     size="sm"
@@ -63,6 +69,7 @@ const TaskDashboard = () => {
                     Switch to {renderFormat} view
                 </Button>
 
+                <TaskCreateModal open={dialogOpen} onOpenChange={setDialogOpen} />
                 <TaskList tasks={tasks} view={view} loading={loading} />
             </VStack>
         </Container>

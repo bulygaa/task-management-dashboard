@@ -56,7 +56,7 @@ export const tasksAPI = {
                 const newTask = {
                     ...taskData,
                     id: Date.now(),
-                    createdAt: new Date().toISOString()
+                    dueDate: new Date().toISOString()
                 };
                 MOCK_TASKS.push(newTask);
                 resolve(newTask);
