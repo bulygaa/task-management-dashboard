@@ -136,13 +136,13 @@ const incrementCount = () => {
 3. **Function called immediately in `onClick`**
 
 ```js
-<Button onClick={incrementCount()}>Add Manual Count</Button> // ❌
+<Button onClick={incrementCount()}>Add Manual Count</Button>
 ```
 
 4. **Missing key prop in `map`**
 
 ```js
 {tasks.map(task =>
-    <Text>{task.title}</Text> // ❌
+    <Text>{task.title}</Text>
 )}
 ```
