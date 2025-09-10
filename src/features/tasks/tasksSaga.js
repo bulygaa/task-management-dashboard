@@ -73,7 +73,6 @@ function* updateTaskStatusSaga(action) {
 function* createTaskSaga(action) {
     try {
         const newTask = yield call([tasksAPI, tasksAPI.createTask], action.payload);
-        console.log(newTask)
         yield put(createTaskSuccess(newTask));
     } catch (err) {
         yield put(createTaskFailure(err.message));
