@@ -37,6 +37,8 @@ const TaskDashboard = () => {
         dispatch(fetchTasksRequest());
     };
 
+    const renderFormat = view === viewFormat.LIST ? viewFormat.GRID : viewFormat.LIST;
+
     return (
         <Container maxW="6xl" py={8}>
             <VStack spacing={6} align="stretch">
@@ -56,9 +58,9 @@ const TaskDashboard = () => {
                 <Button
                     alignSelf="flex-end"
                     size="sm"
-                    onClick={() => setView(view === viewFormat.LIST ? viewFormat.GRID : viewFormat.LIST)}
+                    onClick={() => setView(renderFormat)}
                 >
-                    Switch to {view} View
+                    Switch to {renderFormat} view
                 </Button>
 
                 <TaskList tasks={tasks} view={view} loading={loading} />

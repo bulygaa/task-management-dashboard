@@ -114,6 +114,14 @@ yarn dev
 
 ---
 
+## Bonus Task 1: Performance Optimization
+
+**Implemented:**
+
+* Virtualization for large task lists (100+ items)
+* `React.memo` and `useMemo` applied where appropriate
+* Code splitting for the dashboard feature
+
 ### Documented Bugs Found in `BuggyTaskCounter.jsx`
 
 1. **Missing dependency in `useEffect`**
