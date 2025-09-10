@@ -122,6 +122,12 @@ yarn dev
 * `React.memo` and `useMemo` applied where appropriate
 * Code splitting for the dashboard feature
 
+## Bonus Task 2: Advanced Redux Saga Pattern
+
+**Implemented:**
+
+* Implement task creation with optimistic updates and rollback on failure
+
 ### Documented Bugs Found in `BuggyTaskCounter.jsx`
 
 1. **Missing dependency in `useEffect`**
