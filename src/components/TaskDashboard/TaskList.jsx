@@ -1,16 +1,26 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import {
-    SimpleGrid,
     Stack,
     Skeleton,
     Text,
     Button,
     VStack,
+    useBreakpointValue,
 } from "@chakra-ui/react";
+import { List, Grid } from "react-window";
 import TaskCard from "./TaskCard";
-import {viewFormat} from "../../enums/viewFormat.js";
+import { viewFormat } from "../../enums/viewFormat.js";
+import CellComponent from "../common/CellComponent.jsx";
+import RowComponent from "../common/RowComponent.jsx";
 
-const TaskList = ({ tasks, view, loading }) => {
+const TaskList = React.memo(function ({ tasks, view, loading }) {
+    const [columnCount, setColumnCount] = useState(3);
+    const responsiveColumnCount = useBreakpointValue({ base: 1, md: 2, lg: 3 });
+
+    useEffect(() => {
+        setColumnCount(responsiveColumnCount || 3);
+    }, [responsiveColumnCount]);
+
     if (loading) {
         return (
             <Stack>
@@ -32,13 +42,35 @@ const TaskList = ({ tasks, view, loading }) => {
         );
     }
 
-    if (view === viewFormat.GRID) {
+    if (view === viewFormat.LIST && tasks.length > 0) {
         return (
-            <SimpleGrid gap='10px' columns={[1, 2, 3]} spacing={4}>
-                {tasks.map((task) => (
-                    <TaskCard key={task.id} task={task} />
-                ))}
-            </SimpleGrid>
+            <List
+                rowComponent={RowComponent}
+                rowCount={tasks.length}
+                rowHeight={200}
+                rowProps={{ tasks }}
+                style={{
+                    maxHeight: "700px",
+                }}
+                width="100%"
+            />
+        );
+    }
+
+    if (view === viewFormat.GRID && tasks.length > 0) {
+        return (
+            <Grid
+                cellComponent={CellComponent}
+                columnCount={columnCount}
+                columnWidth={350}
+                rowCount={Math.ceil(tasks.length / columnCount)}
+                rowHeight={200}
+                cellProps={{ tasks, columnCount }}
+                style={{
+                    maxHeight: "700px",
+                }}
+                width="100%"
+            />
         );
     }
 
@@ -49,6 +81,6 @@ const TaskList = ({ tasks, view, loading }) => {
             ))}
         </Stack>
     );
-};
+});
 
 export default TaskList;

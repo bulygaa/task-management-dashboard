@@ -22,11 +22,11 @@ const priorityColors = {
     low: "green",
 };
 
-const TaskCard = ({ task }) => {
+const TaskCard = React.memo(function ({ task }) {
     const dispatch = useDispatch();
     const pendingUpdates = useSelector(selectPendingUpdates);
 
-    const isUpdating = pendingUpdates[task.id];
+    const isUpdating = pendingUpdates[task?.id];
     const isOverdue = new Date(task.dueDate) < new Date();
 
     const statuses = createListCollection({
@@ -38,7 +38,7 @@ const TaskCard = ({ task }) => {
     });
 
     const handleStatusChange = (value) => {
-        dispatch(updateTaskStatusRequest({ taskId: task.id, newStatus: value.value[0] }));
+        dispatch(updateTaskStatusRequest({ taskId: task?.id, newStatus: value.value[0] }));
     };
 
     return (
@@ -107,6 +107,6 @@ const TaskCard = ({ task }) => {
             </Card.Body>
         </Card.Root>
     );
-};
+});
 
 export default TaskCard;

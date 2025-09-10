@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useMemo} from "react";
 import { HStack, Button, Portal, Select, createListCollection } from "@chakra-ui/react";
 import { useDispatch, useSelector } from "react-redux";
 import { setFilter, fetchTasksRequest } from "../../features/tasks/tasksSlice";
@@ -9,7 +9,10 @@ const TaskFilters = () => {
     const dispatch = useDispatch();
     const tasks = useSelector(selectAllTasks);
 
-    const uniqueAssignees = [ALL, ...new Set(tasks?.map((t) => t.assignee))];
+    const uniqueAssignees = useMemo(
+        () => [ALL, ...new Set(tasks?.map((t) => t.assignee))],
+        [tasks]
+    );
 
     const statusCollection = createListCollection({
         items: [
@@ -20,12 +23,16 @@ const TaskFilters = () => {
         ],
     });
 
-    const assigneeCollection = createListCollection({
-        items: uniqueAssignees?.map((a) => ({
-            label: a === ALL ? "All Assignees" : a,
-            value: a,
-        })),
-    });
+    const assigneeCollection = useMemo(
+        () =>
+            createListCollection({
+                items: uniqueAssignees?.map((a) => ({
+                    label: a === ALL ? "All Assignees" : a,
+                    value: a,
+                })),
+            }),
+        [uniqueAssignees]
+    );
 
     const handleStatusChange = (value) => {
         dispatch(setFilter({ status: value.value[0] }));
