@@ -14,6 +14,7 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { updateTaskStatusRequest } from "../../features/tasks/tasksSlice";
 import { selectPendingUpdates } from "../../features/tasks/tasksSelectors";
+import {useColorModeValue} from "../../contexts/ColorModeContext.jsx";
 
 const priorityColors = {
     critical: "red",
@@ -29,6 +30,9 @@ const TaskCard = React.memo(function ({ task }) {
     const isUpdating = pendingUpdates[task?.id];
     const isOverdue = new Date(task.dueDate) < new Date();
 
+    const bgColor = useColorModeValue('#ffffff', '#000000');
+    const textColor = useColorModeValue('#000000', '#ffffff');
+
     const statuses = createListCollection({
         items: [
             { label: "Todo", value: "todo" },
@@ -42,7 +46,7 @@ const TaskCard = React.memo(function ({ task }) {
     };
 
     return (
-        <Card.Root position="relative">
+        <Card.Root position="relative" bg={bgColor} color={textColor}>
             {isUpdating && (
                 <Box
                     position="absolute"

@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from "react";
+import React, { useState } from "react";
 import {
     Dialog,
     Button,
@@ -10,6 +10,7 @@ import {
 } from "@chakra-ui/react";
 import { useDispatch } from "react-redux";
 import { createTaskRequest } from "../../features/tasks/tasksSlice";
+import {useColorModeValue} from "../../contexts/ColorModeContext.jsx";
 
 const TaskCreateDialog = ({ open, onOpenChange }) => {
     const dispatch = useDispatch();
@@ -47,11 +48,14 @@ const TaskCreateDialog = ({ open, onOpenChange }) => {
         setPriority("medium");
     };
 
+    const bgColor = useColorModeValue('#ffffff', '#000000');
+    const textColor = useColorModeValue('#000000', '#ffffff');
+
     return (
-        <Dialog.Root open={open} onOpenChange={(e) => onOpenChange(e.open)}>
+        <Dialog.Root open={open} onOpenChange={(e) => onOpenChange(e.open)} >
             <Dialog.Backdrop />
             <Dialog.Positioner>
-                <Dialog.Content>
+                <Dialog.Content bg={bgColor} color={textColor}>
                     <Dialog.CloseTrigger />
                     <form onSubmit={handleSubmit}>
                         <Dialog.Header>
@@ -143,7 +147,7 @@ const TaskCreateDialog = ({ open, onOpenChange }) => {
                         </Dialog.Body>
 
                         <Dialog.Footer>
-                            <Button variant="outline" mr={3} onClick={() => onOpenChange(false)}>
+                            <Button mr={3} onClick={() => onOpenChange(false)}>
                                 Cancel
                             </Button>
                             <Button colorScheme="blue" type="submit">

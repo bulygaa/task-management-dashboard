@@ -12,12 +12,14 @@ body {
   font-size: 16px;
   font-family: Rubik, sans-serif;
   line-height: 16px;
+  width: 100%;
 }
 
 #root {
   display: flex;
   flex-grow: 1;
   flex-direction: column;
+  width: 100%;
 }
 
 .visually-hidden {

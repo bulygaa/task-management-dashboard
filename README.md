@@ -128,6 +128,14 @@ yarn dev
 
 * Implement task creation with optimistic updates and rollback on failure
 
+## Bonus Task 3: Enhanced UI/UX
+
+**Implemented:**
+
+* Implement keyboard shortcuts for common actions(ctrl + c and ctrl + y to open a modal and switch list view)
+* Add transition animations using Framer Motion with Chakra
+* Dark mode support with Chakra's color mode
+
 ### Documented Bugs Found in `BuggyTaskCounter.jsx`
 
 1. **Missing dependency in `useEffect`**
