@@ -10,9 +10,8 @@ import {
 } from "@chakra-ui/react";
 import { useDispatch } from "react-redux";
 import { createTaskRequest } from "../../features/tasks/tasksSlice";
-import {useColorModeValue} from "../../contexts/ColorModeContext.jsx";
 
-const TaskCreateDialog = ({ open, onOpenChange }) => {
+const TaskCreateDialog = ({ open, onOpenChange, bgColor, textColor }) => {
     const dispatch = useDispatch();
     const [title, setTitle] = useState("");
     const [assignee, setAssignee] = useState("");
@@ -47,9 +46,6 @@ const TaskCreateDialog = ({ open, onOpenChange }) => {
         setStatus("todo");
         setPriority("medium");
     };
-
-    const bgColor = useColorModeValue('#ffffff', '#000000');
-    const textColor = useColorModeValue('#000000', '#ffffff');
 
     return (
         <Dialog.Root open={open} onOpenChange={(e) => onOpenChange(e.open)} >

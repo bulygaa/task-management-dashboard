@@ -4,13 +4,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { setFilter, fetchTasksRequest } from "../../features/tasks/tasksSlice";
 import { selectAllTasks } from "../../features/tasks/tasksSelectors";
 import {ALL} from "../../constants/common.js";
-import {useColorModeValue} from "../../contexts/ColorModeContext.jsx";
 
-const TaskFilters = () => {
+const TaskFilters = ({ bgColor, textColor }) => {
     const dispatch = useDispatch();
     const tasks = useSelector(selectAllTasks);
-    const bgColor = useColorModeValue('#ffffff', '#000000');
-    const textColor = useColorModeValue('#000000', '#ffffff');
 
     const uniqueAssignees = useMemo(
         () => [ALL, ...new Set(tasks?.map((t) => t.assignee))],

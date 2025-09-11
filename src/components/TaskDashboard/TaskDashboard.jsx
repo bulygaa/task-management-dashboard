@@ -110,7 +110,7 @@ const TaskDashboard = () => {
                     borderRadius="md"
                     borderWidth="1px"
                 >
-                    <TaskFilters />
+                    <TaskFilters bgColor={bgColor} textColor={textColor} />
                 </Box>
 
                 <Button
@@ -126,7 +126,6 @@ const TaskDashboard = () => {
                     alignSelf="flex-end"
                     size="sm"
                     onClick={() => setView(renderFormat)}
-                    variant="ghost"
                 >
                     Switch to {renderFormat} view
                 </Button>
@@ -136,6 +135,8 @@ const TaskDashboard = () => {
                         <TaskCreateModal
                             open={dialogOpen}
                             onOpenChange={setDialogOpen}
+                            bgColor={bgColor}
+                            textColor={textColor}
                         />
                     )}
                 </AnimatePresence>
@@ -147,7 +148,7 @@ const TaskDashboard = () => {
                     exit={{ opacity: 0, y: -10 }}
                     transition={{ duration: 0.25 }}
                 >
-                    <TaskList tasks={tasks} view={view} loading={loading} />
+                    <TaskList tasks={tasks} view={view} loading={loading} bgColor={bgColor} textColor={textColor} />
                 </motion.div>
             </VStack>
         </MotionContainer>

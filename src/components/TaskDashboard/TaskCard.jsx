@@ -30,7 +30,7 @@ const TaskCard = React.memo(function ({ task }) {
     const isUpdating = pendingUpdates[task?.id];
     const isOverdue = new Date(task.dueDate) < new Date();
 
-    const bgColor = useColorModeValue('#ffffff', '#000000');
+    const bgColor = useColorModeValue('#ffffff', '#090000');
     const textColor = useColorModeValue('#000000', '#ffffff');
 
     const statuses = createListCollection({
@@ -92,7 +92,7 @@ const TaskCard = React.memo(function ({ task }) {
                     </Select.Control>
                     <Portal>
                         <Select.Positioner>
-                            <Select.Content>
+                            <Select.Content bg={bgColor} color={textColor}>
                                 {statuses.items.map((s) => (
                                     <Select.Item key={s.value} item={s}>
                                         {s.label}
