@@ -136,6 +136,12 @@ yarn dev
 * Add transition animations using Framer Motion with Chakra
 * Dark mode support with Chakra's color mode
 
+## Bonus Task 4: Testing
+
+**Implemented:**
+
+* Write unit tests for Redux reducers and selectors
+
 ### Documented Bugs Found in `BuggyTaskCounter.jsx`
 
 1. **Missing dependency in `useEffect`**

@@ -12,13 +12,10 @@ import TaskCard from "./TaskCard";
 import { viewFormat } from "../../enums/viewFormat.js";
 import CellComponent from "../common/CellComponent.jsx";
 import RowComponent from "../common/RowComponent.jsx";
-import {useColorModeValue} from "../../contexts/ColorModeContext.jsx";
 
-const TaskList = React.memo(function ({ tasks, view, loading }) {
+const TaskList = React.memo(function ({ tasks, view, loading, bgColor, textColor }) {
     const [columnCount, setColumnCount] = useState(3);
     const responsiveColumnCount = useBreakpointValue({ base: 1, md: 2, lg: 3 });
-    const bgColor = useColorModeValue('#ffffff', '#000000');
-    const textColor = useColorModeValue('#000000', '#ffffff');
 
     useEffect(() => {
         setColumnCount(responsiveColumnCount || 3);

@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useState, useEffect } from 'react'
+import {colorMode as colorModeEnum} from "../enums/colorMode.js";
 
 const ColorModeContext = createContext()
 
@@ -7,7 +8,7 @@ export function ColorModeProvider({ children }) {
         const saved = localStorage.getItem('chakra-ui-color-mode')
         if (saved) return saved
 
-        return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
+        return window.matchMedia('(prefers-color-scheme: dark)').matches ? colorModeEnum.DARK : colorModeEnum.LIGHT
     })
 
     useEffect(() => {
@@ -19,7 +20,7 @@ export function ColorModeProvider({ children }) {
         const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)')
         const handleChange = (e) => {
             if (!localStorage.getItem('chakra-ui-color-mode')) {
-                setColorMode(e.matches ? 'dark' : 'light')
+                setColorMode(e.matches ? colorModeEnum.DARK : colorModeEnum.LIGHT)
             }
         }
 
@@ -28,7 +29,7 @@ export function ColorModeProvider({ children }) {
     }, [])
 
     const toggleColorMode = () => {
-        setColorMode(prev => prev === 'light' ? 'dark' : 'light')
+        setColorMode(prev => prev === colorModeEnum.LIGHT ? colorModeEnum.DARK : colorModeEnum.LIGHT)
     }
 
     const value = {
@@ -54,5 +55,5 @@ export function useColorMode() {
 
 export function useColorModeValue(light, dark) {
     const { colorMode } = useColorMode()
-    return colorMode === 'dark' ? dark : light
+    return colorMode === colorModeEnum.DARK ? dark : light
 }
