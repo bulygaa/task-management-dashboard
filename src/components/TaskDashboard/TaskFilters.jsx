@@ -4,10 +4,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { setFilter, fetchTasksRequest } from "../../features/tasks/tasksSlice";
 import { selectAllTasks } from "../../features/tasks/tasksSelectors";
 import {ALL} from "../../constants/common.js";
+import {useColorModeValue} from "../../contexts/ColorModeContext.jsx";
 
 const TaskFilters = () => {
     const dispatch = useDispatch();
     const tasks = useSelector(selectAllTasks);
+    const bgColor = useColorModeValue('#ffffff', '#000000');
+    const textColor = useColorModeValue('#000000', '#ffffff');
 
     const uniqueAssignees = useMemo(
         () => [ALL, ...new Set(tasks?.map((t) => t.assignee))],
@@ -50,7 +53,7 @@ const TaskFilters = () => {
     };
 
     return (
-        <HStack spacing={4} alignItems="end">
+        <HStack bg={bgColor} color={textColor} spacing={4} alignItems="end">
             <Select.Root collection={statusCollection} onValueChange={handleStatusChange}>
                 <Select.HiddenSelect />
                 <Select.Label>Status</Select.Label>
@@ -65,7 +68,7 @@ const TaskFilters = () => {
                 </Select.Control>
                 <Portal>
                     <Select.Positioner>
-                        <Select.Content>
+                        <Select.Content bg={bgColor} color={textColor}>
                             {statusCollection.items?.map((item) => (
                                 <Select.Item key={item.value} item={item}>
                                     {item.label}
@@ -91,7 +94,7 @@ const TaskFilters = () => {
                 </Select.Control>
                 <Portal>
                     <Select.Positioner>
-                        <Select.Content>
+                        <Select.Content bg={bgColor} color={textColor}>
                             {assigneeCollection.items?.map((item) => (
                                 <Select.Item key={item.value} item={item}>
                                     {item.label}
